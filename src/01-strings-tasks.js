@@ -52,7 +52,7 @@ function getStringLength(str) {
  *   'Chuck','Norris'  => 'Hello, Chuck Norris!'
  */
 function getStringFromTemplate(firstName, lastName) {
-  return `Hello, ${firstName} ${lastName}`;
+  return `Hello, ${firstName} ${lastName}!`;
 }
 
 /**
@@ -66,7 +66,7 @@ function getStringFromTemplate(firstName, lastName) {
  *   'Hello, Chuck Norris!' => 'Chuck Norris'
  */
 function extractNameFromTemplate(value) {
-  return value.replace('Hello, ', '');
+  return value.replace('Hello, ', '').replace('!', '');
 }
 
 
@@ -110,8 +110,8 @@ function removeLeadingAndTrailingWhitespaces(value) {
  *   'A', 5  => 'AAAAA'
  *   'cat', 3 => 'catcatcat'
  */
-function repeatString(/* value, count */) {
-  throw new Error('Not implemented');
+function repeatString(value, count) {
+  return value.repeat(count);
 }
 
 /**
@@ -141,8 +141,9 @@ function removeFirstOccurrences(/* str, value */) {
  *   '<span>' => 'span'
  *   '<a>' => 'a'
  */
-function unbracketTag(str) {
-  return str.substr(1, str.length - 1);
+function unbracketTag(/* str */) {
+  // return str.substr(1, str.length - 1);
+  throw new Error('Not implemented');
 }
 
 
@@ -240,8 +241,9 @@ function encodeToRot13(/* str */) {
  *   isString('test') => true
  *   isString(new String('test')) => true
  */
-function isString(value) {
-  return typeof value === 'string';
+function isString(/* value */) {
+  // return typeof value === 'string';
+  throw new Error('Not implemented');
 }
 
 
