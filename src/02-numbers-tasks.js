@@ -35,8 +35,8 @@ function getRectangleArea(width, height) {
  *   3.14 => 19.729201864543903
  *   0    => 0
  */
-function getCicleCircumference(/* radius */) {
-  throw new Error('Not implemented');
+function getCicleCircumference(radius) {
+  return Math.PI * 2 * radius;
 }
 
 /**
@@ -71,8 +71,8 @@ function getAverage(/* value1, value2 */) {
  *   (0,0) (1,0)    => 1
  *   (-5,0) (10,-10) => 18.027756377319946
  */
-function getDistanceBetweenPoints(/* x1, y1, x2, y2 */) {
-  throw new Error('Not implemented');
+function getDistanceBetweenPoints(x1, y1, x2, y2) {
+  return Math.sqrt(((x2 - x1) ** 2) + ((y2 - y1) ** 2));
 }
 
 /**
@@ -126,9 +126,9 @@ function getAngleBetweenVectors(/* x1, y1, x2, y2 */) {
  *     5     => 5
  *     0     => 0
  */
-function getLastDigit(/* value */) {
-  // return value[value.length - 1];
-  throw new Error('Not implemented');
+function getLastDigit(value) {
+  const num = value.toString();
+  return num[num.length - 1];
 }
 
 
@@ -143,9 +143,8 @@ function getLastDigit(/* value */) {
  *     '37'     => 37
  * '-525.5'     => -525.5
  */
-function parseNumberFromString(/* value */) {
-  throw new Error('Not implemented');
-  // return parseInt(value, 10);
+function parseNumberFromString(value) {
+  return Number(value);
 }
 
 /**
@@ -183,6 +182,7 @@ function getParallelipidedDiagonal(/* a, b, c */) {
  *   1678, 3  => 2000
  */
 function roundToPowerOfTen(/* num, pow */) {
+  // return Math.round(num * (10 ** (pow - 1)));
   throw new Error('Not implemented');
 }
 
@@ -203,8 +203,14 @@ function roundToPowerOfTen(/* num, pow */) {
  *   16 => false
  *   17 => true
  */
-function isPrime(/* n */) {
-  throw new Error('Not implemented');
+function isPrime(n) {
+  if (n <= 1) return false;
+  if (n % 2 === 0 && n > 2) return false;
+  const square = Math.sqrt(n);
+  for (let i = 3; i <= square; i += 2) {
+    if (n % i === 0) return false;
+  }
+  return true;
 }
 
 /**
@@ -223,6 +229,10 @@ function isPrime(/* n */) {
  *   toNumber(new Number(42), 0) => 42
  */
 function toNumber(/* value, def */) {
+  // if (value instanceof Number || typeof value === 'number') return value;
+  // const num = Number(value);
+  // if (typeof num !== 'number') return num;
+  // return def;
   throw new Error('Not implemented');
 }
 
