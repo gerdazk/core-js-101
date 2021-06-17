@@ -68,15 +68,14 @@ function getFactorial(/* n */) {
  *   5,10  =>  45 ( = 5+6+7+8+9+10 )
  *   -1,1  =>  0  ( = -1 + 0 + 1 )
  */
-function getSumBetweenNumbers(/* n1, n2 */) {
-  // let result = n1;
-  // let arg = n1;
-  // while (n2 > arg) {
-  //   arg -= arg;
-  //   result += arg;
-  // }
-  // return result;
-  throw new Error('Not implemented');
+function getSumBetweenNumbers(n1, n2) {
+  let result = n1;
+  let arg = n1;
+  while (n2 > arg) {
+    arg += 1;
+    result += arg;
+  }
+  return result;
 }
 
 /**
@@ -204,8 +203,28 @@ function findFirstSingleChar(/* str */) {
  *   5, 3, true, true   => '[3, 5]'
  *
  */
-function getIntervalString(/* a, b, isStartIncluded, isEndIncluded */) {
-  throw new Error('Not implemented');
+function getIntervalString(a, b, isStartIncluded, isEndIncluded) {
+  const arr = [];
+  if (isStartIncluded) {
+    arr.push('[');
+  }
+  if (!isStartIncluded) {
+    arr.push('(');
+  }
+  if (a > b) {
+    arr.push(b, ', ', a);
+  }
+  if (a < b) {
+    arr.push(a, ', ', b);
+  }
+
+  if (isEndIncluded) {
+    arr.push(']');
+  }
+  if (!isEndIncluded) {
+    arr.push(')');
+  }
+  return arr.join('');
 }
 
 /**
@@ -220,8 +239,8 @@ function getIntervalString(/* a, b, isStartIncluded, isEndIncluded */) {
  * 'rotator' => 'rotator'
  * 'noon' => 'noon'
  */
-function reverseString(/* str */) {
-  throw new Error('Not implemented');
+function reverseString(str) {
+  return str.split('').reverse().join('');
 }
 
 /**
@@ -279,7 +298,17 @@ function isCreditCardNumber(/* ccn */) {
  *   165536 (1+6+5+5+3+6 = 26,  2+6 = 8) => 8
  */
 function getDigitalRoot(/* num */) {
+  // let result = num;
+  // let acc = num;
+  // while (result > 9) {
+  //   acc = result;
+  //   result = 0;
+  //   acc = acc.toString().split('');
+  //   for (let i = 0; i < acc.length; i += i) {
+  //     result += Number(acc[i]);
+  //   }
   throw new Error('Not implemented');
+  // }
 }
 
 /**
