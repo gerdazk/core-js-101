@@ -17,7 +17,7 @@
  * See more details: https://en.wikipedia.org/wiki/Globally_unique_identifier
  *
  * Match :
- *   '{3F2504E0-4F89-41D3-9A0C-0305E82C3301}'
+ *   '{3F2504E0-4891-41D3-9A0C-0305E82C3301}'
  *   '{21EC2020-3AEA-4069-A2DD-08002B30309D}'
  *   '{0c74f13f-fa83-4c48-9b33-68921dd72463}'
  *
@@ -32,7 +32,7 @@
  * @return {RegExp}
  */
 function getRegexForGuid() {
-  throw new Error('Not implemented');
+  return /{[a-f\d]{8}-[a-f\d]{3,4}-[a-f\d]{4}-[a-f\d]{4}-[a-f\d]{12}}/i;
 }
 
 
@@ -51,9 +51,10 @@ function getRegexForGuid() {
  * NOTE : the regex length should be < 13
  *
  * @return {RegExp}
- *
+ * tik lowercase, pirmas ne tarpas,
  */
 function getRegexForPitSpot() {
+  // let reg = /^.[^t]$/
   throw new Error('Not implemented');
 }
 
@@ -80,6 +81,8 @@ function getRegexForPitSpot() {
  */
 function getPasswordValidator(/* minLength */) {
   throw new Error('Not implemented');
+  // return new RegExp(`^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])[A-Za-z0-9] {${minLength}, }$`);
+  // return /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])[A-Za-z0-9]$/
 }
 
 
