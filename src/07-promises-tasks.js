@@ -5,6 +5,7 @@
  *                                                                                                *
  ************************************************************************************************ */
 
+
 /**
  * Return Promise object that is resolved with string value === 'Hooray!!! She said "Yes"!',
  * if boolean value === true is passed, resolved with string value === 'Oh no, she said "No".',
@@ -98,11 +99,19 @@ function getFastestPromise(array) {
  *    });
  *
  */
-function chainPromises(/* array, action */) {
-  throw new Error('Not implemented');
-  // return new Promise((res) => {
-
-  // });
+function chainPromises(array, action) {
+  return new Promise((res, rej) => {
+    const arr = [];
+    array.forEach((promise) => {
+      promise.then((result) => {
+        arr.push(result);
+      })
+        .catch((e) => {
+          rej(e);
+        });
+      res(arr);
+    });
+  }).then((resolve) => resolve.reduce(action));
 }
 
 module.exports = {
