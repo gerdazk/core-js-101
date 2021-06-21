@@ -39,7 +39,6 @@ function willYouMarryMe(isPositiveAnswer) {
   });
 }
 
-
 /**
  * Return Promise object that should be resolved with array containing plain values.
  * Function receive an array of Promise objects.
@@ -101,6 +100,9 @@ function getFastestPromise(array) {
  */
 function chainPromises(/* array, action */) {
   throw new Error('Not implemented');
+  // return new Promise((res) => {
+
+  // });
 }
 
 module.exports = {

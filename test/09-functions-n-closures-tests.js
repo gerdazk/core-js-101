@@ -97,8 +97,8 @@ describe('09-functions-n-closures-tasks', () => {
       log += `${text}\n`;
       return log;
     };
-    
     const cosLogger = tasks.logger(Math.cos, logFunc);
+
     const actual = cosLogger(Math.PI);
 
     assert.equal(actual, -1, 'logger function should return the original result from specified function');

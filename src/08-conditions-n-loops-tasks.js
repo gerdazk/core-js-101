@@ -129,8 +129,14 @@ function isTriangle(a, b, c) {
  *   { top:20, left:20, width: 20, height: 20 }    =>  false
  *
  */
-function doRectanglesOverlap(/* rect1, rect2 */) {
-  throw new Error('Not implemented');
+function doRectanglesOverlap(rect1, rect2) {
+  const bottom1x = rect1.width + rect1.left;
+  const bottom1y = rect1.height + rect1.top;
+  const bottom2x = rect2.width + rect2.left;
+  const bottom2y = rect2.height + rect2.top;
+  if (rect1.left >= bottom2x || rect2.left >= bottom1x) return false;
+  if (rect1.top >= bottom2y || rect2.top >= bottom1y) return false;
+  return true;
 }
 
 /**
@@ -160,17 +166,6 @@ function doRectanglesOverlap(/* rect1, rect2 */) {
  *
  */
 function isInsideCircle(circle, point) {
-  // const len = circle.radius / 2;
-  // if (
-  //   point.x > circle.center.x + len
-  //   || point.x < circle.center.x - len
-  //   || point.y > circle.center.y + len
-  //   || point.y < circle.center.y
-  // ) {
-  //   return false;
-  // }
-  // return true;
-
   return (
     (point.x - circle.center.x) * (point.x - circle.center.x)
       + (point.y - circle.center.y) * (point.y - circle.center.y)
@@ -358,26 +353,31 @@ function getDigitalRoot(num) {
  *   '[[][]][' => false
  *   '{)' = false
  *   '{[(<{[]}>)]}' = true
+ * ----
+ * [[]
+ * 1) pirmas: [ [ ] antras:
+ * 2) pirmas: [ [, [ ] antras:
+ * 3) pirmas: [ [, [ ] antras:
  */
-function isBracketsBalanced(/* str */) {
-  throw new Error('Not implemented');
-  // if (str.startsWith(']')) return false;
-  // const objektas = str.split('').reduce((acc, val) => {
-  //   if (acc[val]) {
-  //     acc[val] += 1;
-  //   } else {
-  //     acc[val] = 1;
-  //   }
-  //   return acc;
-  // }, {});
-
-  // console.log('---\n', objektas, '\n---');
-  // return (
-  //   objektas['['] === objektas[']']
-  //   && objektas['{'] === objektas['}']
-  //   && objektas['('] === objektas[')']
-  //   && objektas['<'] === objektas['>']
-  // );
+function isBracketsBalanced(str) {
+  if (str === '') return true;
+  if (str.length % 2 !== 0) return false;
+  const brackets = {
+    '(': ')',
+    '{': '}',
+    '<': '>',
+    '[': ']',
+  };
+  const arr = [];
+  for (let i = 0; i < str.length; i += 1) {
+    const val = str[i];
+    if (brackets[val]) {
+      arr.push(brackets[val]);
+    } else if (val !== arr.pop()) {
+      return false;
+    }
+  }
+  return true;
 }
 
 /**
@@ -449,8 +449,22 @@ function getCommonDirectoryPath(pathes) {
  *                         [ 6 ]]
  *
  */
-function getMatrixProduct(/* m1, m2 */) {
-  throw new Error('Not implemented');
+function getMatrixProduct(m1, m2) {
+  const rows1 = m1.length;
+  const columns1 = m1[0].length;
+  const columns2 = m2[0].length;
+
+  const arr = Array(rows1);
+  for (let i = 0; i < rows1; i += 1) {
+    arr[i] = Array(columns2);
+    for (let j = 0; j < columns2; j += 1) {
+      arr[i][j] = 0;
+      for (let k = 0; k < columns1; k += 1) {
+        arr[i][j] += m1[i][k] * m2[k][j];
+      }
+    }
+  }
+  return arr;
 }
 
 /**

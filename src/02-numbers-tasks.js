@@ -7,7 +7,6 @@
  *                                                                                           *
  ******************************************************************************************* */
 
-
 /**
  * Returns an area of a rectangle given by width and heigth.
  *
@@ -22,7 +21,6 @@
 function getRectangleArea(width, height) {
   return width * height;
 }
-
 
 /**
  * Returns a circumference of circle given by radius.
@@ -71,7 +69,7 @@ function getAverage(value1, value2) {
  *   (-5,0) (10,-10) => 18.027756377319946
  */
 function getDistanceBetweenPoints(x1, y1, x2, y2) {
-  return Math.sqrt(((x2 - x1) ** 2) + ((y2 - y1) ** 2));
+  return Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2);
 }
 
 /**
@@ -89,7 +87,6 @@ function getDistanceBetweenPoints(x1, y1, x2, y2) {
 function getLinearEquationRoot(a, b) {
   return -b / a;
 }
-
 
 /**
  * Returns an angle (in radians) between two vectors given by xi and yi,
@@ -109,9 +106,14 @@ function getLinearEquationRoot(a, b) {
  *   (0,1) (0,1)     => 0
  *   (0,1) (1,2)     => 0
  */
-function getAngleBetweenVectors(/* x1, y1, x2, y2 */) {
-  // return Math.atan2(y2 - y1, x2 - x1);
-  throw new Error('Not implemented');
+function getAngleBetweenVectors(x1, y1, x2, y2) {
+  if (Math.atan2(y2, x2) > Math.atan2(y1, x1)) {
+    return Math.atan2(y2, x2) - Math.atan2(y1, x1);
+  }
+  if (Math.atan2(y2, x2) < Math.atan2(y1, x1)) {
+    return Math.atan2(y1, x1) - Math.atan2(y2, x2);
+  }
+  return 0;
 }
 
 /**
@@ -130,7 +132,6 @@ function getLastDigit(value) {
   const num = value.toString();
   return num[num.length - 1];
 }
-
 
 /**
  * Returns a number by given string representation.
@@ -182,7 +183,7 @@ function getParallelipidedDiagonal(a, b, c) {
  *   1678, 3  => 2000
  */
 function roundToPowerOfTen(num, pow) {
-  return Math.round(num / (10 ** pow)) * (10 ** pow);
+  return Math.round(num / 10 ** pow) * 10 ** pow;
 }
 
 /**

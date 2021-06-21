@@ -111,32 +111,77 @@ function fromJSON(proto, json) {
  */
 
 const cssSelectorBuilder = {
-  element(/* value */) {
-    throw new Error('Not implemented');
+  result: '',
+  element2: null,
+  id2: null,
+  pseudoElement2: null,
+  element(value) {
+    this.error(1);
+    if (this.element2) throw new Error('Element, id and pseudo-element should not occur more then one time inside the selector');
+    const objBuilder = Object.create(cssSelectorBuilder);
+    objBuilder.result = this.result + value;
+    objBuilder.index = 1;
+    objBuilder.element2 = value;
+    return objBuilder;
   },
 
-  id(/* value */) {
-    throw new Error('Not implemented');
+  id(value) {
+    this.error(2);
+    if (this.id2) throw new Error('Element, id and pseudo-element should not occur more then one time inside the selector');
+    const objBuilder = Object.create(cssSelectorBuilder);
+    objBuilder.result = `${this.result}#${value}`;
+    objBuilder.id2 = value;
+    objBuilder.index = 2;
+    return objBuilder;
   },
 
-  class(/* value */) {
-    throw new Error('Not implemented');
+  class(value) {
+    this.error(3);
+    const objBuilder = Object.create(cssSelectorBuilder);
+    objBuilder.result = `${this.result}.${value}`;
+    objBuilder.index = 3;
+    return objBuilder;
   },
 
-  attr(/* value */) {
-    throw new Error('Not implemented');
+  attr(value) {
+    this.error(4);
+    const objBuilder = Object.create(cssSelectorBuilder);
+    objBuilder.result = `${this.result}[${value}]`;
+    objBuilder.index = 4;
+    return objBuilder;
   },
 
-  pseudoClass(/* value */) {
-    throw new Error('Not implemented');
+  pseudoClass(value) {
+    this.error(5);
+    const objBuilder = Object.create(cssSelectorBuilder);
+    objBuilder.result = `${this.result}:${value}`;
+    objBuilder.index = 5;
+    return objBuilder;
   },
 
-  pseudoElement(/* value */) {
-    throw new Error('Not implemented');
+  pseudoElement(value) {
+    this.error(6);
+    if (this.pseudoElement2) throw new Error('Element, id and pseudo-element should not occur more then one time inside the selector');
+    const objBuilder = Object.create(cssSelectorBuilder);
+    objBuilder.result = `${this.result}::${value}`;
+    objBuilder.pseudoElement2 = value;
+    objBuilder.index = 6;
+    return objBuilder;
   },
 
-  combine(/* selector1, combinator, selector2 */) {
-    throw new Error('Not implemented');
+  stringify() {
+    return this.result;
+  },
+
+  combine(selector1, combinator, selector2) {
+    const objBuilder = Object.create(cssSelectorBuilder);
+    objBuilder.result = `${selector1.stringify()} ${combinator} ${selector2.stringify()}`;
+    return objBuilder;
+  },
+  error(ind) {
+    if (ind < this.index) {
+      throw new Error('Selector parts should be arranged in the following order: element, id, class, attribute, pseudo-class, pseudo-element');
+    }
   },
 };
 

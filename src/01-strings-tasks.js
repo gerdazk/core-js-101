@@ -5,7 +5,6 @@
  *                                                                                           *
  ******************************************************************************************* */
 
-
 /**
  * Returns the result of concatenation of two strings.
  *
@@ -21,7 +20,6 @@
 function concatenateStrings(str1, str2) {
   return str1 + str2;
 }
-
 
 /**
  * Returns the length of given string.
@@ -68,7 +66,6 @@ function getStringFromTemplate(firstName, lastName) {
 function extractNameFromTemplate(value) {
   return value.replace('Hello, ', '').replace('!', '');
 }
-
 
 /**
  * Returns a first char of the given string.
@@ -145,7 +142,6 @@ function unbracketTag(str) {
   return str.substring(1, str.length - 1);
 }
 
-
 /**
  * Converts all characters of the specified string into the upper case
  *
@@ -202,10 +198,51 @@ function extractEmails(str) {
  *             '└──────────┘\n'
  *
  */
-function getRectangleString(/* width, height */) {
-  throw new Error('Not implemented');
-}
+function getRectangleString(width, height) {
+  let ret = '';
+  new Array(width).fill(0).map((value, index, array) => {
+    if (index === 0) {
+      ret += '┌';
+    } else if (index === array.length - 1) {
+      ret += '┐\n';
+    } else {
+      ret += '─';
+    }
+    return ret;
+  });
 
+  Array(height - 2)
+    .fill(0)
+    .map(() => {
+      Array(width)
+        .fill(0)
+        .map((value, index, array) => {
+          if (index === 0) {
+            ret += '│';
+          } else if (index === array.length - 1) {
+            ret += '│\n';
+          } else {
+            ret += ' ';
+          }
+          return ret;
+        });
+      return ret;
+    });
+
+  Array(width)
+    .fill(0)
+    .map((value, index, array) => {
+      if (index === 0) {
+        ret += '└';
+      } else if (index === array.length - 1) {
+        ret += '┘\n';
+      } else {
+        ret += '─';
+      }
+      return ret;
+    });
+  return ret;
+}
 
 /**
  * Encode specified string with ROT13 cipher
@@ -251,7 +288,6 @@ function isString(value) {
   return false;
 }
 
-
 /**
  * Returns playid card id.
  *
@@ -277,13 +313,62 @@ function isString(value) {
  *   'K♠' => 51
  */
 function getCardId(value) {
-  const cards = ['A♣', '2♣', '3♣', '4♣', '5♣', '6♣', '7♣', '8♣', '9♣', '10♣', 'J♣', 'Q♣', 'K♣',
-    'A♦', '2♦', '3♦', '4♦', '5♦', '6♦', '7♦', '8♦', '9♦', '10♦', 'J♦', 'Q♦', 'K♦',
-    'A♥', '2♥', '3♥', '4♥', '5♥', '6♥', '7♥', '8♥', '9♥', '10♥', 'J♥', 'Q♥', 'K♥',
-    'A♠', '2♠', '3♠', '4♠', '5♠', '6♠', '7♠', '8♠', '9♠', '10♠', 'J♠', 'Q♠', 'K♠'];
+  const cards = [
+    'A♣',
+    '2♣',
+    '3♣',
+    '4♣',
+    '5♣',
+    '6♣',
+    '7♣',
+    '8♣',
+    '9♣',
+    '10♣',
+    'J♣',
+    'Q♣',
+    'K♣',
+    'A♦',
+    '2♦',
+    '3♦',
+    '4♦',
+    '5♦',
+    '6♦',
+    '7♦',
+    '8♦',
+    '9♦',
+    '10♦',
+    'J♦',
+    'Q♦',
+    'K♦',
+    'A♥',
+    '2♥',
+    '3♥',
+    '4♥',
+    '5♥',
+    '6♥',
+    '7♥',
+    '8♥',
+    '9♥',
+    '10♥',
+    'J♥',
+    'Q♥',
+    'K♥',
+    'A♠',
+    '2♠',
+    '3♠',
+    '4♠',
+    '5♠',
+    '6♠',
+    '7♠',
+    '8♠',
+    '9♠',
+    '10♠',
+    'J♠',
+    'Q♠',
+    'K♠',
+  ];
   return cards.indexOf(value);
 }
-
 
 module.exports = {
   concatenateStrings,

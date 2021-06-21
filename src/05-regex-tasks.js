@@ -51,11 +51,9 @@ function getRegexForGuid() {
  * NOTE : the regex length should be < 13
  *
  * @return {RegExp}
- * tik lowercase, pirmas ne tarpas,
  */
 function getRegexForPitSpot() {
-  // let reg = /^.[^t]$/
-  throw new Error('Not implemented');
+  return /[is]/;
 }
 
 
@@ -79,10 +77,8 @@ function getRegexForPitSpot() {
  *   'PASSW0RD'.match(validator)  => false
  *   'Pa55'.match(validator) => false
  */
-function getPasswordValidator(/* minLength */) {
-  throw new Error('Not implemented');
-  // return new RegExp(`^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])[A-Za-z0-9] {${minLength}, }$`);
-  // return /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])[A-Za-z0-9]$/
+function getPasswordValidator(minLength) {
+  return new RegExp(`(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?!.*?[ ])[A-Za-z0-9]{${minLength},}`);
 }
 
 
